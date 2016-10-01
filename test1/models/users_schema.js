@@ -15,7 +15,7 @@ var user_schema = new Schema({
         required: true
     },
     date_of_birth: {
-        type: String,
+        type: Date,
         required: true
     }
 }, {

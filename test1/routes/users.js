@@ -16,7 +16,11 @@ router.route('/')
 })
 .post(function (req, res, next) {
     console.log('Post function!');
-    console.log('budy '+req.body);
+    //var currentDate = new Date();
+    //console.log('current data '+currentDate);
+    //req.body.date_of_birth = currentDate;
+    console.log('body '+req.body.date_of_birth);
+    
     Users.create(req.body, function (err, item) {
         if (err) throw err;
         console.log('User added!');
