@@ -36,5 +36,21 @@ angular
             $scope.form_user = "";
         };
 
+        // delete a specific user from the database
+        $scope.delete_user = function(id) {
+            console.log("delete user:"+id);
+            $http.delete(server_address+'/users/' + id).success(function(response) {
+                refresh();
+            });
+        };
+
+        // fetch user info for editing
+        $scope.edit_user = function(id) {
+            console.log("edit user:"+id);
+            $http.get(server_address+'/users/' + id).success(function(response) {
+                $scope.form_user = response; // put response into input box
+            });
+        };
+
   }]);
 

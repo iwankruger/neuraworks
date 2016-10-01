@@ -60,7 +60,6 @@
                             <th>Id number</th>
                             <th>Date of Birth</th>
                             <th>&nbsp;</th>
-                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,8 +68,7 @@
                             <td>{{user.surname}}</td>
                             <td>{{user.id}}</td>
                             <td>{{user.date_of_birth}}</td>
-                            <td><button class="btn btn-danger" ng-click="delete(user._id)">Delete</button></td>
-                            <td><button class="btn btn-warning" ng-click="edit(user._id)">Edit</button></td>
+                            <td><button class="btn btn-danger" ng-click="delete_user(user._id)">Delete</button></td>     
                         </tr>
                     </tbody>
                 </table>
