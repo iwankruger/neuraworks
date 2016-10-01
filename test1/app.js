@@ -8,6 +8,20 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+// require mongoose and the config file for the database
+var mongoose = require('mongoose');
+// config settings for the database
+var config = require('./config');
+
+// connect to server
+mongoose.connect(config.mongoUrl);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    // we're connected!
+    console.log("Connected correctly to server");
+});
+
 var app = express();
 
 // view engine setup
