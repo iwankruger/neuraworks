@@ -15,7 +15,7 @@ angular
                 // store users in an object
                 $scope.user_list = response;
                 // clear input boxes
-                $scope.user = ""; 
+                $scope.form_user = ""; 
             });
         };
 
@@ -28,6 +28,12 @@ angular
                 console.log(response);
                 refresh();
             });
+        };
+
+        // clear input form
+        $scope.cancel = function() {
+            // clear input boxes
+            $scope.form_user = "";
         };
 
   }]);
