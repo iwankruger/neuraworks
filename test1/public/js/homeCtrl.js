@@ -4,6 +4,7 @@ angular
         var server_address = server_url;
         console.log("Hello world from controller server url = "+server_address);
         
+        // get users from database update view
         var refresh = function() {
             console.log("refresh items");
             //console.log(getServerUrl());
@@ -19,6 +20,15 @@ angular
         };
 
         refresh(); // get data when we load the page
+
+        // add user to database
+        $scope.add_user = function() {
+            console.log($scope.form_user);
+            $http.post(server_address+'/users', $scope.form_user).success(function(response) {
+                console.log(response);
+                refresh();
+            });
+        };
 
   }]);
 
