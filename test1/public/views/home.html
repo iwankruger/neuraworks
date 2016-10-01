@@ -1,7 +1,81 @@
 <div class="container">
-    <h1>Users</h1>
-    <p>This is the user page</p>
-      
+   
+    <div class="row row-content">
+        <div class="col-xs-12">
+            <h1>Add an user</h1>
+        </div>
+        
+        <div class="col-xs-12 col-sm-6 col-sm-pushf-6"> 
+            <form class="form-horizontal" role="form" ng-submit="add_user()">
+                <!-- Name -->
+                 <div class="form-group">
+                    <label for="user_name" class="col-sm-3 control-label">Name</label>                        
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Enter Name" ng-model="form_user.name">
+                        </div>
+                 </div>
+                 <!-- Surname -->
+                 <div class="form-group">
+                    <label for="user_lastname" class="col-sm-3 control-label">Surname</label>                        
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="user_lastname" name="user_lastname" placeholder="Enter Surname" ng-model="form_user.surname">
+                    </div>
+                 </div>
+                 <!-- Employer id -->
+                 <div class="form-group">
+                    <label for="user_employercode" class="col-sm-3 control-label">ID number</label>                        
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="user_id" name="user_id" placeholder="Enter ID number" ng-model="form_user.id">
+                    </div>
+                 </div>
+                 <!-- Contact number -->
+                 <div class="form-group">
+                    <label for="user_contact_number" class="col-sm-3 control-label">Date of Birth</label>                        
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="user_date_of_birth" name="user_date_of_birth" placeholder="Enter date of birth" ng-model="form_user.date_of_birth">
+                    </div>
+                 </div>
+                                        
+                 <!-- buttons -->        
+                 <div class="form-group">                       
+                    <div class="col-sm-9 col-sm-push-3">       
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" ng-hide="modal_button_submit_hide">Post</button>
+                    </div>
+                 </div> 
+            </form>
+        </div>
+    </div>
+
+    <div class="row row-content">
+        <div class="col-xs-12">
+            <h1>Users</h1>
+        </div>
+        <div class="col-xs-12 "> 
+            <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Id number</th>
+                            <th>Date of Birth</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in user_list">
+                            <td>{{user.name}}</td>
+                            <td>{{user.surname}}</td>
+                            <td>{{user.id}}</td>
+                            <td>{{user.date_of_birth}}</td>
+                            <td><button class="btn btn-danger" ng-click="delete(user._id)">Delete</button></td>
+                            <td><button class="btn btn-warning" ng-click="edit(user._id)">Edit</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    </div>
 
  </div>
  

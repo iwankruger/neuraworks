@@ -9,11 +9,8 @@
 </head>
 
 <body>
-    <div>
-        <div class="col-sm-8 col-sm-offset-2">
-            <ui-view></ui-view>
-        </div>    
-    </div>
+    
+    <ui-view></ui-view>
   
     <!-- angular scripts -->
     <script src="js/angular.min.js"></script>
@@ -24,6 +21,9 @@
    
     <!-- controllers -->
     <script src="js/homeCtrl.js"></script>  
+
+    <!-- config file contains server url etc. -->
+    <script src="config.js"></script>
     
 </body>
 </html>
