@@ -4,6 +4,7 @@ angular
         var server_address = server_url;
         console.log("Hello world from controller server url = "+server_address);
         
+        $scope.getArray = [{a: 1, b:2}, {a:3, b:4}]; 
 
         // date picker
         var date_input=$('input[name="picker_date_of_birth"]'); //our date input has the name "picker_date_of_birth"
@@ -155,5 +156,33 @@ angular
               mCtrl.$parsers.push(myValidation);
           }
       };
-  });
+  })
+  .directive('exportToCsv',function(){
+  	return {
+    	restrict: 'A',
+    	link: function (scope, element, attrs) {
+    		var el = element[0];
+	        element.bind('click', function(e){
+	        	var table = e.target.nextElementSibling;
+	        	var csvString = '';
+	        	for(var i=0; i<table.rows.length;i++){
+	        		var rowData = table.rows[i].cells;
+	        		for(var j=0; j<rowData.length;j++){
+	        			csvString = csvString + rowData[j].innerHTML + ",";
+	        		}
+	        		csvString = csvString.substring(0,csvString.length - 1);
+	        		csvString = csvString + "\n";
+			    }
+	         	csvString = csvString.substring(0, csvString.length - 1);
+	         	var a = $('<a/>', {
+		            style:'display:none',
+		            href:'data:application/octet-stream;base64,'+btoa(csvString),
+		            download:'emailStatistics.csv'
+		        }).appendTo('body')
+		        a[0].click()
+		        a.remove();
+	        });
+    	}
+  	}
+	});
 

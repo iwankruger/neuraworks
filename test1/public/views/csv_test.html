@@ -1,0 +1,46 @@
+
+
+<div class="container">
+   
+    <div class="row row-content">
+        <div class="col-xs-12">
+            <h1>CSV test program <a class="btn btn-danger pull-right" ui-sref="home">Go to home</a></h1>
+        </div>
+
+        <div class="col-xs-12 col-sm-6"> 
+            <form name="my_form "class="form-horizontal" role="form" ng-submit="my_form.$valid && generate_csv_data(form_record.number)">
+                <!-- Name -->
+                 <div class="form-group">
+                    <label for="record_number" class="col-sm-4 control-label">Number of records to generate</label>                        
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="record_number" name="record_number" placeholder="Enter Number" ng-model="form_record.number" pattern="[0-9]{1,50}" required>
+                            <span style="color:red" ng-show="my_form.record_number.$dirty && my_form.record_number.$invalid && form_record.number!=''">
+                                <span ng-show="my_form.record_number.$error.required">Number required</span>
+                                <span ng-show="my_form.record_number.$error.pattern">Not a valid number</span>
+                            </span>
+                        </div>
+                 </div>
+               
+                                        
+                 <!-- buttons -->        
+                 <div class="form-group">                       
+                    <div class="col-sm-8 col-sm-push-4">       
+                        <button  ng-disabled="!my_form.$valid" type="submit" class="btn btn-primary">Generate random records</button>
+                    </div>
+                 </div> 
+
+                 <div class="form-group">                       
+                    <div class="col-sm-8 col-sm-push-4">       
+                        <button type="button" class="btn btn-primary" ng-csv="array_to_write_to_csv" csv-header="csv_header" filename="output.csv">Export csv file</button>
+                    </div>
+                 </div> 
+            </form>
+        </div>
+
+
+
+
+    </div>
+
+ </div>
+ 
