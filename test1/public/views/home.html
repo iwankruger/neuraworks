@@ -5,34 +5,47 @@
             <h1>Add an user</h1>
         </div>
 
- 
-
 
         
         <div class="col-xs-12 col-sm-6 col-sm-pushf-6"> 
-            <form class="form-horizontal" role="form" ng-submit="add_user()">
+            <form name="my_form "class="form-horizontal" role="form" ng-submit="my_form.$valid && add_user()">
                 <!-- Name -->
                  <div class="form-group">
                     <label for="user_name" class="col-sm-3 control-label">Name</label>                        
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Enter Name" ng-model="form_user.name">
+                            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Enter Name" ng-model="form_user.name"required>
+                            <span style="color:red" ng-show="my_form.user_name.$dirty && my_form.user_name.$invalid && form_user.name!=''">
+                                <span ng-show="my_form.user_name.$error.required">Name required</span>
+                            </span>
                         </div>
                  </div>
                  <!-- Surname -->
                  <div class="form-group">
                     <label for="user_lastname" class="col-sm-3 control-label">Surname</label>                        
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="user_lastname" name="user_lastname" placeholder="Enter Surname" ng-model="form_user.surname">
-                    </div>
+                        <input type="text" class="form-control" id="user_lastname" name="user_lastname" placeholder="Enter Surname" ng-model="form_user.surname" required>
+                        <span style="color:red" ng-show="my_form.user_lastname.$dirty && my_form.user_lastname.$invalid && form_user.surname!=''">
+                            <span ng-show="my_form.user_lastname.$error.required">Surname required</span>
+                        </span>
+                     </div>
                  </div>
                  <!-- Employer id -->
                  <div class="form-group">
-                    <label for="user_employercode" class="col-sm-3 control-label">ID number</label>                        
+                    <label for="label_user_id" class="col-sm-3 control-label">ID number</label>                        
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="user_id" name="user_id" placeholder="Enter ID number" ng-model="form_user.id">
+                        <input type="text" class="form-control" id="user_id" name="user_id" placeholder="Enter ID number" ng-model="form_user.id" maxlength="13" required my-directive>
+                        <span style="color:red" ng-show="my_form.user_id.$dirty && my_form.user_id.$invalid && form_user.id!=''">
+                            <span ng-show="my_form.user_id.$error.required">ID number required</span>
+                            <span ng-show="my_form.user_id.$error.only_digits">ID number invalid</span>
+                            <span ng-show="my_form.user_id.$error.id_length && !my_form.user_id.$error.only_digits">ID number is 13 digit number</span>
+                        </span>
+                        <span style="color:red" ng-show="my_form.user_id.$dirty && !my_form.user_id.$invalid && id_number_in_db && id_number_that_is_in_db == form_user.id">
+                            <span>ID number already in database</span>
+                        </span>
+                        
                     </div>
                  </div>
-                 <!-- Date of birth -->
+                 <!-- Date of birth
                  <div class="form-group">
                     <label for="user_contact_number" class="col-sm-3 control-label">Date of Birth</label>                        
                     <div class="col-sm-9">
@@ -41,18 +54,42 @@
                                 <i class="fa fa-calendar"> 
                                 </i>
                             </div>
-                            <input class="form-control" id="picker_date_of_birth" name="picker_date_of_birth" placeholder="MM/DD/YYYY" type="text"/>
+                            <input class="form-control" id="picker_date_of_birth" name="picker_date_of_birth" placeholder="MM/DD/YYYY" ng-model="form_user.date_select"/>
                         </div>
+                     
+                        <span style="color:red" ng-show="my_form.picker_date_of_birth.$dirty && my_form.picker_date_of_birth.$invalid">
+                            <span ng-show="my_form.picker_date_of_birth.$error.required">Date of birth required</span>
+                        </span>
+                    </div>
+                 </div>
+                 -->
+                 <!-- Date of birth -->
+                 <div class="form-group">
+                    <label for="user_contact_number" class="col-sm-3 control-label">Date of Birth</label>                        
+                    <div class="col-sm-9">
+                        <input type="date" class="form-control" id="user_date_of_birth" name="user_date_of_birth" ng-model="form_user.date_of_birth" placeholder="DD/MM/YYYY" required>
+                        <span style="color:red" ng-show="my_form.user_date_of_birth.$dirty && my_form.user_date_of_birth.$invalid && form_user.date_of_birth!=''">
+                            <span ng-show="my_form.user_date_of_birth.$error.required">Date of birth required</span>
+                        </span>
                     </div>
                  </div>
 
+                 <div class="form-group">                       
+                    <div class="col-sm-9 col-sm-push-3">       
+                        <div ng-if="!my_form.user_date_of_birth.$invalid && !my_form.user_id.$invalid" >
+                            <span style="color:red" ng-show="!id_and_date_of_birth_match()">
+                                <span>ID number and date of birth does not match</span>
+                            </span>
+                        </div>
+                    </div>
+                 </div> 
                 
                                         
                  <!-- buttons -->        
                  <div class="form-group">                       
                     <div class="col-sm-9 col-sm-push-3">       
                         <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Post</button>
+                        <button  ng-disabled="check_to_disable_submit_button(my_form.$valid)" type="submit" class="btn btn-primary">Post</button>
                     </div>
                  </div> 
             </form>
