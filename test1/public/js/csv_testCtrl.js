@@ -53,6 +53,15 @@ angular
                         ];
 
 
+
+        var refresh = function(){
+            $scope.generate_success = false;
+            $scope.form_record ={number:''};
+        }
+
+        refresh();
+        
+
         // generate a random date of birth
         var generate_date_of_birth = function(){
             var start_date = new Date(1940,1,1);
@@ -77,7 +86,9 @@ angular
 
             // convert the sting to a integer
             var number_of_records_int = parseInt(number_of_records_string); 
+            $scope.generate_success = false;
 
+            // generate random records
             for(var i=0;i<number_of_records_int;i++) {
                 var record = {Id:'', Name:'', Surname:'', Initials:'', Age:'', DateOfBirth:''};
                 // record id
@@ -100,14 +111,78 @@ angular
             
 
             $scope.array_to_write_to_csv = random_records;
-            //console.log($scope.array_to_write_to_csv);
+            $scope.generate_success = true;
+            console.log($scope.array_to_write_to_csv);
         }
+
+        $scope.upload_file = function(){
+            console.log("file: ",$scope.fileContent);
+            //console.log("file length: ",$scope.fileContent.length);
+            console.log("mydata: ",$scope.myData);
+            console.log("file length: ",$scope.myData.data.length);
+
+            $scope.myData.data.splice(0, 1);
+            //$scope.myData.splice($scope.myData.length-1,1);
+            console.log("file length: ",$scope.myData.data.length);
+            console.log("file: ",$scope.myData.data[0]);
+            
+
+            
+            
+            
+        }
+
+        
 
        
 
 
         
 
-  }]);
+  }])
+  .directive('fileReader', function() {
+  return {
+    scope: {
+      fileReader:"="
+    },
+    link: function(scope, element) {
+      $(element).on('change', function(changeEvent) {
+        var files = changeEvent.target.files;
+        if (files.length) {
+          var r = new FileReader();
+          r.onload = function(e) {
+              var contents = e.target.result;
+              scope.$apply(function () {
+                scope.fileReader = contents;
+              });
+          };
+          
+          r.readAsText(files[0]);
+        }
+      });
+    }
+  };
+})
+.directive('csvUpload', function () {
+  return {
+    restrict: 'E',
+    template: '<input type="file" onchange="angular.element(this).scope().handleFiles(this.files)">',
+    require: 'ngModel',
+    scope: {},
+    link: function (scope, element, attrs, ngModel) {
+      scope.handleFiles = function (files) {
+        Papa.parse(files[0], {
+          dynamicTyping: true,
+          complete: function(results) {
+            // you can transform the uploaded data here if necessary
+            // ...
+            ngModel.$setViewValue(results);
+          }
+        });
+      };
+
+    }
+  };
+});
   
 
