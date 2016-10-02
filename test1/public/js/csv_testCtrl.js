@@ -56,11 +56,11 @@ angular
         // generate a random date of birth
         var generate_date_of_birth = function(){
             var start_date = new Date(1940,1,1);
-            console.log("start date ",start_date);
+            //console.log("start date ",start_date);
             var end_date = new Date();
-            console.log("start date ",end_date);
+            //console.log("start date ",end_date);
             var random_date = new Date(start_date.getTime() + Math.random() * (end_date.getTime() - start_date.getTime()));
-            console.log("random date ",random_date);
+            //console.log("random date ",random_date);
             return random_date;
         }
 
@@ -95,12 +95,12 @@ angular
                 // calculate age
                 record.Age = calculate_age(birthday);
                 random_records.push(record); 
-                console.log(record);      
+                //console.log(record);      
             }
             
 
             $scope.array_to_write_to_csv = random_records;
-            console.log($scope.array_to_write_to_csv);
+            //console.log($scope.array_to_write_to_csv);
         }
 
        
