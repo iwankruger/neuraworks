@@ -44,6 +44,9 @@ tr:nth-child(even) {
                             <span style="color:green" ng-show="!my_form.record_number.$invalid && generate_success">
                                 <span>Record generate successfully, click on download button next</span>
                             </span>
+                            <span style="color:black" ng-if="generate_records">
+                                <span>Please be patient, this will take a while.  Generating record ({{record_count}} of {{form_record.number}})</span>
+                            </span>
                         </div>
                         <!-- generate random records -->
                         <div class="col-sm-4">       
@@ -57,35 +60,42 @@ tr:nth-child(even) {
                     <div class="col-sm-8">       
                         <button type="button" class="btn btn-primary" ng-csv="array_to_write_to_csv" csv-header="csv_header" filename="output.csv" ng-click="generate_success=false">Download csv file</button>
                     </div>
-                 </div> 
-
-                <!-- Image upload inline-->
-                <div class="form-group">
-                    <label for="equipmentimage" class="col-sm-4 control-label">Upload csv file</label>                        
-                    <div class="col-sm-8">
-                        <csv-upload ng-model="myData" onchange="angular.element(this).scope().upload_file()">
-                        
-                    </div>
-                </div>
-                
+                 </div>      
 
             </form>
+
+            <form name="my_form2 "class="form-horizontal" role="form" >
+                <!-- Image upload inline-->
+                 <label for="equipmentimage" class="col-sm-4 control-label">Upload csv file</label>                        
+                 <div class="col-sm-8">
+                            <input type="file" file-model="myFile"/>
+                            <button ng-click="uploadFile()">upload me</button>
+                        <span style="color:green" ng-show="loading_file">
+                            <span>Please wait.  Loading file ....</span>
+                        </span>
+                        <span style="color:black" ng-show="file2.length > 2">
+                        <!-- number of records is the length of the file minus 2
+                        the minus 2 accounts for thee header and the EOF -->
+                            <span>{{file2.length-2}} records uploaded</span>
+                        </span>
+                 </div>
+            </form>
+            
         </div>
-
-
-
-
-
 
 
     </div>
 
     <div class="row row-content">
         <div class="col-xs-12">
+            <button ng-click="load_next_data()"class="pull-right">next data</button>
+            <button ng-click="load_prev_data()" class="pull-right">prev data</button>
+            
             <div id="divID">
                 <table>
-                    <tr ng-repeat="x in myData.data">
-                    <td ng-repeat="y in x">{{ y }}</td>
+                    <tr ng-repeat="x in file2 | limitTo:limit_number_of_elements:limit_begin"><!-- myData.data"> -->
+                    <td ng-if="x.length==6"ng-repeat="y in x">{{ y }}</td>
+                    
                     </tr>
                 </table>
             </div>
