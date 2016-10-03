@@ -7,7 +7,7 @@ Node.js, NPM and MongoDB
 3. Check node and npm installation.  In the terminal type the following: <br />
 $node -v <br />
 v4.5.0 <br />
-4npm -v <br />
+$npm -v <br />
 2.15.9 <br />
 
 #Install Mongodb
@@ -20,9 +20,11 @@ $mongod --dbpath=data <br />
 1. In a terminal go to the test1 folder in this project and then
 2. Install project dependencies <br />
 $npm install
-3. Start server <br />
+3. Start mongodb <br />
+$mongod --dbpath=data <br />
+4. Start server <br />
 $npm start <br />
-4. In a browser go to <br />
+5. In a browser go to <br />
 http://localhost:3000/ <br />
 
 #Screenshot of program 1, upload user information
