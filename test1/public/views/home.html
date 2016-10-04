@@ -14,7 +14,7 @@
                  <div class="form-group">
                     <label for="user_name" class="col-sm-3 control-label">Name</label>                        
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Enter Name" ng-model="form_user.name" pattern="[A-Za-z]{1,50}" required>
+                            <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Enter Name" ng-model="form_user.name" pattern="[A-Za-z][A-Za-z\s]{1,50}" required>
                             <span style="color:red" ng-show="my_form.user_name.$dirty && my_form.user_name.$invalid && form_user.name!=''">
                                 <span ng-show="my_form.user_name.$error.required">Name required</span>
                                 <span ng-show="my_form.user_name.$error.pattern">Not a valid name</span>
@@ -25,7 +25,7 @@
                  <div class="form-group">
                     <label for="user_lastname" class="col-sm-3 control-label">Surname</label>                        
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="user_lastname" name="user_lastname" placeholder="Enter Surname" ng-model="form_user.surname" pattern="[A-Za-z]{1,50}" required>
+                        <input type="text" class="form-control" id="user_lastname" name="user_lastname" placeholder="Enter Surname" ng-model="form_user.surname" pattern="[A-Za-z][A-Za-z\s]{1,50}" required>
                         <span style="color:red" ng-show="my_form.user_lastname.$dirty && my_form.user_lastname.$invalid && form_user.surname!=''">
                             <span ng-show="my_form.user_lastname.$error.required">Surname required</span>
                             <span ng-show="my_form.user_lastname.$error.pattern">Not a valid surname</span>
@@ -92,7 +92,8 @@
                  <div class="form-group">                       
                     <div class="col-sm-9 col-sm-push-3">       
                         <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
-                        <button  ng-disabled="check_to_disable_submit_button(my_form.$valid)" type="submit" class="btn btn-primary">Post</button>
+                        <!-- <button  ng-disabled="check_to_disable_submit_button(my_form.$valid)" type="submit" class="btn btn-primary">Post</button> -->
+                        <button type="submit" class="btn btn-primary">Post</button> 
                     </div>
                  </div> 
             </form>
